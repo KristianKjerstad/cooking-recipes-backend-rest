@@ -1,7 +1,6 @@
 package rest
 
 import (
-	"net/http"
 	"time"
 
 	"github.com/go-chi/chi/v5"
@@ -16,11 +15,13 @@ func (a *App) loadRoutes() {
 	// processing should be stopped.
 	router.Use(middleware.Timeout(60 * time.Second))
 
-	router.Get("/", hello)
+	router.Get("/", Hello)
+	router.Route("/recipes", a.loadRecipeRoutes)
 
 	a.Router = router
 }
 
-func hello(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte("hello"))
+func (a *App) loadRecipeRoutes(router chi.Router) {
+	router.Get("/", getAllRecipes)
+	router.Get("/{id}", getRecipeByID)
 }
