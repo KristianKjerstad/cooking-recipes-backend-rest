@@ -131,6 +131,13 @@ func (db *DB) FindRecipeByName(name string) *model.Recipe {
 	return &recipe
 }
 
+// AllRecipes godoc
+// @Summary Get all recipes
+// @Description get all recipes
+// @ID allrecipes
+// @Produce json
+// @Success 200 {object} []model.Recipe
+// @Router /recipes [get]
 func (db *DB) AllRecipes() []*model.Recipe {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()

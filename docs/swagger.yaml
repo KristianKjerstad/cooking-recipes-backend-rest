@@ -1,0 +1,73 @@
+basePath: /
+definitions:
+  model.Category:
+    enum:
+    - DRINK
+    - MAIN_COURSE
+    - DESSERT
+    - APPETIZER
+    type: string
+    x-enum-varnames:
+    - CategoryDrink
+    - CategoryMainCourse
+    - CategoryDessert
+    - CategoryAppetizer
+  model.Ingredient:
+    properties:
+      _id:
+        type: string
+      name:
+        type: string
+      quantity:
+        type: number
+      unit:
+        type: string
+    type: object
+  model.Recipe:
+    properties:
+      _id:
+        type: string
+      category:
+        $ref: '#/definitions/model.Category'
+      description:
+        type: string
+      ingredients:
+        items:
+          $ref: '#/definitions/model.Ingredient'
+        type: array
+      name:
+        type: string
+      steps:
+        items:
+          type: string
+        type: array
+    type: object
+host: localhost:4000
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /recipes:
+    get:
+      description: get all recipes
+      operationId: allrecipes
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Recipe'
+            type: array
+      summary: Get all recipes
+swagger: "2.0"

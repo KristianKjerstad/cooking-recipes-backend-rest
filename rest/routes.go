@@ -5,6 +5,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 func (a *App) loadRoutes() {
@@ -16,6 +17,7 @@ func (a *App) loadRoutes() {
 	router.Use(middleware.Timeout(60 * time.Second))
 
 	router.Get("/", Hello)
+	router.Get("/swagger/*", httpSwagger.WrapHandler)
 	router.Route("/recipes", a.loadRecipeRoutes)
 
 	a.Router = router
