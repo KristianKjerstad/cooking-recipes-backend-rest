@@ -24,4 +24,5 @@ func (a *App) loadRoutes() {
 func (a *App) loadRecipeRoutes(router chi.Router) {
 	router.Get("/", getAllRecipes)
 	router.Get("/{id}", getRecipeByID)
+	router.Post("/", AddRecipe)
 }

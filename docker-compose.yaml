@@ -1,6 +1,19 @@
 version: '3.8'
 
 services:
+  # app:
+  #   build: .
+  #   ports:
+  #     - "4000:4000"
+  #   volumes:
+  #     - .:/app
+  #   environment:
+  #     - DB_HOST=mongodb
+  #     - DB_PASSWORD=password
+  #     - DB_USER=admin
+  #     - DB_PORT=27017
+  #   command: air
+
 
 
   mongodb:
