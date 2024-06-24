@@ -54,6 +54,33 @@ func Connect() *DB {
 	return &DB{client: client, recipeCollection: recipeCollection, ingredientCollection: ingredientCollection}
 }
 
+func (db *DB) SaveIngredientWithID(input *model.Ingredient) *model.Ingredient {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	objectID, err1 := primitive.ObjectIDFromHex(input.ID)
+	if err1 != nil {
+		log.Print(err1)
+		return nil
+	}
+	ingredientWithObjectID := &struct {
+		ID   primitive.ObjectID `json:"_id" bson:"_id"`
+		Name string             `json:"name"`
+	}{
+		ID:   objectID,
+		Name: input.Name,
+	}
+	_, err := db.ingredientCollection.InsertOne(ctx, ingredientWithObjectID)
+	if err != nil {
+		log.Print(err)
+		return nil
+	}
+	return &model.Ingredient{
+		ID:   input.ID,
+		Name: input.Name,
+	}
+}
+
 func (db *DB) SaveIngredient(input *model.IngredientWithoutID) *model.Ingredient {
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()

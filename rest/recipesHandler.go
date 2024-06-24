@@ -135,7 +135,7 @@ func GenerateRecipes(w http.ResponseWriter, r *http.Request) {
 
 	// numRecipesToCreate := 10
 	recipesCreated := make([]*model.Recipe, 0)
-	filename := "data/testdata.json"
+	filename := "data/recipetestdata.json"
 
 	fileContent, err := os.Open(filename)
 

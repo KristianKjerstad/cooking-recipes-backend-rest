@@ -34,4 +34,5 @@ func (a *App) loadIngredientRoutes(router chi.Router) {
 	router.Get("/", getAllIngredients)
 	router.Post("/", AddIngredient)
 	router.Get("/{name}", getIngredientByName)
+	router.Post("/generate", GenerateIngredients)
 }

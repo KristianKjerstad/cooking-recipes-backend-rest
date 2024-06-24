@@ -1,0 +1,38 @@
+[
+    {
+        "_id": "667964f9617b4b08b6e53b91",
+        "name": "bread"
+    },
+    {
+        "_id": "667964f9617b4b08b6e53b92",
+        "name": "tomatoes"
+    },
+    {
+        "_id": "667964f9617b4b08b6e53b92",
+        "name": "garlic"
+    },
+    {
+        "_id": "667964f9617b4b08b6e53b94",
+        "name": "basil"
+    },
+    {
+        "_id": "6679653e9bd1a63168331001",
+        "name": "spaghetti"
+    },
+    {
+        "_id": "6679653e9bd1a63168331002",
+        "name": "pancetta"
+    },
+    {
+        "_id": "6679653e9bd1a63168331003",
+        "name": "eggs"
+    },
+    {
+        "_id": "6679653e9bd1a63168331004",
+        "name": "parmesan cheese"
+    },
+    {
+        "_id": "60d6ecde8d137f0001f9b1a5",
+        "name": "black pepper"
+    }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "_id": "60d6ecde8d137f0001f9b1a1",
+    "name": "Bruschetta",
+    "description": "Grilled bread with tomatoes",
+    "category": "APPETIZER",
+    "steps": [
+      "Toast bread",
+      "Mix tomatoes with garlic and basil",
+      "Top bread with mixture"
+    ],
+    "ingredients": [
+      "667964f9617b4b08b6e53b91",
+      "667964f9617b4b08b6e53b92",
+      "667964f9617b4b08b6e53b93",
+      "667964f9617b4b08b6e53b94"
+    ]
+  },
+  {
+    "_id": "60d6ecde8d137f0001f9b1a2",
+    "name": "Spaghetti Carbonara",
+    "description": "Pasta with eggs, cheese, pancetta, and black pepper",
+    "category": "MAIN_COURSE",
+    "steps": [
+      "Cook spaghetti",
+      "Fry pancetta until crispy",
+      "Mix eggs, cheese, and pepper",
+      "Combine spaghetti with egg mixture"
+    ],
+    "ingredients": [
+      "6679653e9bd1a63168331001",
+      "6679653e9bd1a63168331002",
+      "6679653e9bd1a63168331003",
+      "6679653e9bd1a63168331004",
+      "60d6ecde8d137f0001f9b1a5"
+    ]
+  }
+]

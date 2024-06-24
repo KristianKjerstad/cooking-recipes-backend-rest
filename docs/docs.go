@@ -72,6 +72,27 @@ const docTemplate = `{
                 }
             }
         },
+        "/ingredients/generate": {
+            "post": {
+                "description": "Generate ingredients",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Generate ingredients",
+                "operationId": "generateingredients",
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Ingredient"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/ingredients/{name}": {
             "get": {
                 "description": "get ingredient by name",

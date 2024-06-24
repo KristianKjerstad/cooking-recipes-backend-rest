@@ -139,6 +139,20 @@ paths:
           schema:
             $ref: '#/definitions/model.Ingredient'
       summary: Get ingredient by name
+  /ingredients/generate:
+    post:
+      description: Generate ingredients
+      operationId: generateingredients
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            items:
+              $ref: '#/definitions/model.Ingredient'
+            type: array
+      summary: Generate ingredients
   /recipes:
     get:
       description: get all recipes

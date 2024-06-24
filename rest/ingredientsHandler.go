@@ -3,7 +3,9 @@ package rest
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"net/http"
+	"os"
 	"rest/model"
 
 	"github.com/go-chi/chi/v5"
@@ -102,4 +104,47 @@ func AddIngredient(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusCreated)
 	w.Write(data)
+}
+
+// GenerateIngredients godoc
+// @Summary Generate ingredients
+// @Description Generate ingredients
+// @ID generateingredients
+// @Produce json
+// Accept json
+// @Success 201 {object} []model.Ingredient
+// @Router /ingredients/generate [post]
+func GenerateIngredients(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	ingredientsCreated := make([]*model.Ingredient, 0)
+	filename := "data/ingredienttestdata.json"
+
+	fileContent, err := os.Open(filename)
+
+	if err != nil {
+		fmt.Errorf("failed to open file")
+		w.Write(getErrorResponse("Failed to open testdata file"))
+	}
+
+	defer fileContent.Close()
+
+	byteResult, _ := io.ReadAll(fileContent)
+
+	var testData []model.Ingredient
+	json.Unmarshal([]byte(byteResult), &testData)
+
+	for _, ingredient := range testData {
+		ingredientCopy := model.Ingredient{
+			ID:   ingredient.ID,
+			Name: ingredient.Name,
+		}
+		ingredientsCreated = append(ingredientsCreated, &ingredient)
+		db.SaveIngredientWithID(&ingredientCopy)
+	}
+
+	w.WriteHeader(http.StatusCreated)
+	res, _ := loadDataAsJSON(ingredientsCreated)
+	w.Write(res)
+
 }
