@@ -83,8 +83,8 @@ paths:
       produces:
       - application/json
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
           schema:
             $ref: '#/definitions/model.Recipe'
       summary: Add a recipe
@@ -106,4 +106,18 @@ paths:
           schema:
             $ref: '#/definitions/model.Recipe'
       summary: Get recipe by ID
+  /recipes/generate:
+    post:
+      description: Generate recipes
+      operationId: generaterecipe
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            items:
+              $ref: '#/definitions/model.Recipe'
+            type: array
+      summary: Generate recipe
 swagger: "2.0"

@@ -63,10 +63,31 @@ const docTemplate = `{
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "OK",
+                    "201": {
+                        "description": "Created",
                         "schema": {
                             "$ref": "#/definitions/model.Recipe"
+                        }
+                    }
+                }
+            }
+        },
+        "/recipes/generate": {
+            "post": {
+                "description": "Generate recipes",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Generate recipe",
+                "operationId": "generaterecipe",
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Recipe"
+                            }
                         }
                     }
                 }

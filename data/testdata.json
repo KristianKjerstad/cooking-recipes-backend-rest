@@ -1,0 +1,539 @@
+[
+  {
+    "_id": "60d6ecde8d137f0001f9b1a1",
+    "name": "Bruschetta",
+    "description": "Grilled bread with tomatoes",
+    "category": "APPETIZER",
+    "steps": [
+      "Toast bread",
+      "Mix tomatoes with garlic and basil",
+      "Top bread with mixture"
+    ],
+    "ingredients": [
+      {
+        "_id": "60d6ecde8d137f0001f9b1a1-1",
+        "name": "bread",
+        "quantity": 1,
+        "unit": "slice"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a1-2",
+        "name": "tomatoes",
+        "quantity": 2,
+        "unit": "pieces"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a1-3",
+        "name": "garlic",
+        "quantity": 1,
+        "unit": "clove"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a1-4",
+        "name": "basil",
+        "quantity": 2,
+        "unit": "leaves"
+      }
+    ]
+  },
+  {
+    "_id": "60d6ecde8d137f0001f9b1a2",
+    "name": "Spaghetti Carbonara",
+    "description": "Pasta with eggs, cheese, pancetta, and black pepper",
+    "category": "MAIN_COURSE",
+    "steps": [
+      "Cook spaghetti",
+      "Fry pancetta until crispy",
+      "Mix eggs, cheese, and pepper",
+      "Combine spaghetti with egg mixture"
+    ],
+    "ingredients": [
+      {
+        "_id": "60d6ecde8d137f0001f9b1a2-1",
+        "name": "spaghetti",
+        "quantity": 200,
+        "unit": "g"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a2-2",
+        "name": "pancetta",
+        "quantity": 100,
+        "unit": "g"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a2-3",
+        "name": "eggs",
+        "quantity": 2,
+        "unit": "pieces"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a2-4",
+        "name": "parmesan cheese",
+        "quantity": 50,
+        "unit": "g"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a2-5",
+        "name": "black pepper",
+        "quantity": 1,
+        "unit": "tsp"
+      }
+    ]
+  },
+  {
+    "_id": "60d6ecde8d137f0001f9b1a3",
+    "name": "Pizza Margherita",
+    "description": "Classic Italian pizza with tomato sauce, mozzarella, and basil",
+    "category": "MAIN_COURSE",
+    "steps": [
+      "Preheat oven to 250°C (480°F)",
+      "Roll out pizza dough into a circle",
+      "Spread tomato sauce over dough",
+      "Sprinkle mozzarella cheese evenly",
+      "Arrange basil leaves on top",
+      "Bake for 10-12 minutes until crust is golden and cheese is bubbly"
+    ],
+    "ingredients": [
+      {
+        "_id": "60d6ecde8d137f0001f9b1a3-1",
+        "name": "pizza dough",
+        "quantity": 1,
+        "unit": "ball"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a3-2",
+        "name": "tomato sauce",
+        "quantity": 100,
+        "unit": "ml"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a3-3",
+        "name": "mozzarella cheese",
+        "quantity": 150,
+        "unit": "g"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a3-4",
+        "name": "fresh basil leaves",
+        "quantity": 10,
+        "unit": "leaves"
+      }
+    ]
+  },
+  {
+    "_id": "60d6ecde8d137f0001f9b1a4",
+    "name": "Guacamole",
+    "description": "Creamy avocado dip with tomatoes, onions, and lime juice",
+    "category": "APPETIZER",
+    "steps": [
+      "Mash avocados in a bowl",
+      "Add chopped tomatoes, onions, and cilantro",
+      "Squeeze lime juice over mixture",
+      "Season with salt and pepper, mix well"
+    ],
+    "ingredients": [
+      {
+        "_id": "60d6ecde8d137f0001f9b1a4-1",
+        "name": "ripe avocados",
+        "quantity": 2,
+        "unit": "pieces"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a4-2",
+        "name": "tomatoes",
+        "quantity": 1,
+        "unit": "piece"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a4-3",
+        "name": "red onion",
+        "quantity": 1,
+        "unit": "small"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a4-4",
+        "name": "cilantro",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a4-5",
+        "name": "lime",
+        "quantity": 1,
+        "unit": "piece"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a4-6",
+        "name": "salt",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a4-7",
+        "name": "black pepper",
+        "quantity": 1,
+        "unit": "tsp"
+      }
+    ]
+  },
+  {
+    "_id": "60d6ecde8d137f0001f9b1a5",
+    "name": "Chocolate Cake",
+    "description": "Rich and decadent chocolate cake with chocolate ganache",
+    "category": "DESSERT",
+    "steps": [
+      "Preheat oven to 180°C (350°F)",
+      "Grease and flour cake pans",
+      "Mix flour, cocoa powder, baking powder, and salt",
+      "Cream butter and sugar until fluffy",
+      "Add eggs one at a time, mix well",
+      "Gradually add dry ingredients and milk, mix until smooth",
+      "Pour batter into pans, bake for 30-35 minutes",
+      "Let cool, then frost with chocolate ganache"
+    ],
+    "ingredients": [
+      {
+        "_id": "60d6ecde8d137f0001f9b1a5-1",
+        "name": "all-purpose flour",
+        "quantity": 200,
+        "unit": "g"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a5-2",
+        "name": "cocoa powder",
+        "quantity": 50,
+        "unit": "g"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a5-3",
+        "name": "baking powder",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a5-4",
+        "name": "salt",
+        "quantity": 1,
+        "unit": "pinch"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a5-5",
+        "name": "butter",
+        "quantity": 150,
+        "unit": "g"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a5-6",
+        "name": "granulated sugar",
+        "quantity": 150,
+        "unit": "g"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a5-7",
+        "name": "eggs",
+        "quantity": 3,
+        "unit": "pieces"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a5-8",
+        "name": "milk",
+        "quantity": 120,
+        "unit": "ml"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a5-9",
+        "name": "heavy cream",
+        "quantity": 100,
+        "unit": "ml"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a5-10",
+        "name": "dark chocolate",
+        "quantity": 200,
+        "unit": "g"
+      }
+    ]
+  },
+  {
+    "_id": "60d6ecde8d137f0001f9b1a6",
+    "name": "Mojito",
+    "description": "Refreshing Cuban cocktail with rum, mint, lime juice, sugar, and soda water",
+    "category": "DRINK",
+    "steps": [
+      "Muddle mint leaves and sugar in a glass",
+      "Add lime juice and rum, stir well",
+      "Fill glass with ice cubes",
+      "Top with soda water, stir gently",
+      "Garnish with mint sprig and lime wedge"
+    ],
+    "ingredients": [
+      {
+        "_id": "60d6ecde8d137f0001f9b1a6-1",
+        "name": "fresh mint leaves",
+        "quantity": 10,
+        "unit": "leaves"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a6-2",
+        "name": "granulated sugar",
+        "quantity": 2,
+        "unit": "tsp"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a6-3",
+        "name": "lime juice",
+        "quantity": 50,
+        "unit": "ml"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a6-4",
+        "name": "white rum",
+        "quantity": 50,
+        "unit": "ml"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a6-5",
+        "name": "soda water",
+        "quantity": 100,
+        "unit": "ml"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a6-6",
+        "name": "mint sprig",
+        "quantity": 1,
+        "unit": "piece"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a6-7",
+        "name": "lime wedge",
+        "quantity": 1,
+        "unit": "piece"
+      }
+    ]
+  },
+  {
+    "_id": "60d6ecde8d137f0001f9b1a7",
+    "name": "Caprese Salad",
+    "description": "Simple and fresh salad with tomatoes, mozzarella, basil, and balsamic glaze",
+    "category": "APPETIZER",
+    "steps": [
+      "Slice tomatoes and mozzarella into rounds",
+      "Arrange tomato and mozzarella slices on a plate, alternating",
+      "Tuck fresh basil leaves between slices",
+      "Drizzle with balsamic glaze",
+      "Season with salt and pepper to taste"
+    ],
+    "ingredients": [
+      {
+        "_id": "60d6ecde8d137f0001f9b1a7-1",
+        "name": "ripe tomatoes",
+        "quantity": 2,
+        "unit": "pieces"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a7-2",
+        "name": "fresh mozzarella",
+        "quantity": 1,
+        "unit": "ball"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a7-3",
+        "name": "fresh basil leaves",
+        "quantity": 5,
+        "unit": "leaves"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a7-4",
+        "name": "balsamic glaze",
+        "quantity": 2,
+        "unit": "tbsp"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a7-5",
+        "name": "salt",
+        "quantity": 1,
+        "unit": "pinch"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a7-6",
+        "name": "black pepper",
+        "quantity": 1,
+        "unit": "pinch"
+      }
+    ]
+  },
+  {
+    "_id": "60d6ecde8d137f0001f9b1a8",
+    "name": "Chicken Tikka Masala",
+    "description": "Spicy and creamy Indian curry with marinated chicken in a tomato-based sauce",
+    "category": "MAIN_COURSE",
+    "steps": [
+      "Marinate chicken in yogurt and spices",
+      "Grill or bake marinated chicken until cooked",
+      "Prepare tomato-based sauce with onions, garlic, and spices",
+      "Add cooked chicken to the sauce, simmer until flavors meld"
+    ],
+    "ingredients": [
+      {
+        "_id": "60d6ecde8d137f0001f9b1a8-1",
+        "name": "chicken breast",
+        "quantity": 500,
+        "unit": "g"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a8-2",
+        "name": "plain yogurt",
+        "quantity": 100,
+        "unit": "g"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a8-3",
+        "name": "tomatoes",
+        "quantity": 3,
+        "unit": "medium"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a8-4",
+        "name": "onion",
+        "quantity": 1,
+        "unit": "large"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a8-5",
+        "name": "garlic cloves",
+        "quantity": 3,
+        "unit": "pieces"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a8-6",
+        "name": "ginger",
+        "quantity": 1,
+        "unit": "inch"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a8-7",
+        "name": "garam masala",
+        "quantity": 1,
+        "unit": "tbsp"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a8-8",
+        "name": "cumin",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a8-9",
+        "name": "coriander",
+        "quantity": 1,
+        "unit": "tsp"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a8-10",
+        "name": "heavy cream",
+        "quantity": 100,
+        "unit": "ml"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a8-11",
+        "name": "butter",
+        "quantity": 2,
+        "unit": "tbsp"
+      }
+    ]
+  },
+  {
+    "_id": "60d6ecde8d137f0001f9b1a9",
+    "name": "Pina Colada",
+    "description": "Tropical cocktail with rum, coconut cream, and pineapple juice",
+    "category": "DRINK",
+    "steps": [
+      "Blend rum, coconut cream, pineapple juice, and ice until smooth",
+      "Pour into a chilled glass",
+      "Garnish with a pineapple wedge and maraschino cherry"
+    ],
+    "ingredients": [
+      {
+        "_id": "60d6ecde8d137f0001f9b1a9-1",
+        "name": "white rum",
+        "quantity": 60,
+        "unit": "ml"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a9-2",
+        "name": "coconut cream",
+        "quantity": 60,
+        "unit": "ml"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a9-3",
+        "name": "pineapple juice",
+        "quantity": 120,
+        "unit": "ml"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a9-4",
+        "name": "ice",
+        "quantity": 1,
+        "unit": "cup"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a9-5",
+        "name": "pineapple wedge",
+        "quantity": 1,
+        "unit": "piece"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1a9-6",
+        "name": "maraschino cherry",
+        "quantity": 1,
+        "unit": "piece"
+      }
+    ]
+  },
+  {
+    "_id": "60d6ecde8d137f0001f9b1aa",
+    "name": "Stuffed Mushrooms",
+    "description": "Mushroom caps stuffed with breadcrumbs, cheese, and herbs",
+    "category": "APPETIZER",
+    "steps": [
+      "Remove stems from mushrooms and set aside",
+      "Mix breadcrumbs, grated cheese, minced garlic, and chopped parsley",
+      "Stuff mushroom caps with mixture",
+      "Bake stuffed mushrooms until golden and crispy"
+    ],
+    "ingredients": [
+      {
+        "_id": "60d6ecde8d137f0001f9b1aa-1",
+        "name": "large mushrooms",
+        "quantity": 8,
+        "unit": "pieces"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1aa-2",
+        "name": "breadcrumbs",
+        "quantity": 100,
+        "unit": "g"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1aa-3",
+        "name": "grated cheese (e.g., Parmesan)",
+        "quantity": 50,
+        "unit": "g"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1aa-4",
+        "name": "garlic cloves",
+        "quantity": 2,
+        "unit": "pieces"
+      },
+      {
+        "_id": "60d6ecde8d137f0001f9b1aa-5",
+        "name": "fresh parsley",
+        "quantity": 2,
+        "unit": "tbsp",
+        "optional": true
+      }
+    ]
+  }
+]

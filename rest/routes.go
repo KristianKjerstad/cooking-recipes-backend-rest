@@ -26,4 +26,5 @@ func (a *App) loadRecipeRoutes(router chi.Router) {
 	router.Get("/", getAllRecipes)
 	router.Get("/{id}", getRecipeByID)
 	router.Post("/", AddRecipe)
+	router.Post("/generate", GenerateRecipes)
 }

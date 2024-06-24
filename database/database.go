@@ -52,7 +52,7 @@ func Connect() *DB {
 	return &DB{client: client, recipeCollection: recipeCollection}
 }
 
-func (db *DB) SaveRecipe(input *model.NewRecipeInput) *model.Recipe {
+func (db *DB) SaveRecipe(input *model.RecipeWithoutID) *model.Recipe {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -180,7 +180,7 @@ func (db *DB) UpdateRecipe(newRecipe *model.UpdateRecipeInput) (*model.Recipe, e
 	recipe := model.Recipe{
 		ID:          newRecipe.ID,
 		Name:        derefValue(newRecipe.Name, originalRecipe.Name),
-		Description: derefValue(&newRecipe.Description, originalRecipe.Description),
+		Description: derefValue(newRecipe.Description, originalRecipe.Description),
 		Category:    derefValue(newRecipe.Category, originalRecipe.Category),
 		Steps:       newRecipe.Steps,
 		Ingredients: ingredients,

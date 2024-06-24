@@ -4,7 +4,9 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
+	"os"
 	"rest/database"
 	"rest/model"
 
@@ -91,18 +93,18 @@ func getRecipeByID(w http.ResponseWriter, r *http.Request) {
 
 }
 
-// GetRecipe godoc
+// AddRecipe godoc
 // @Summary Add a recipe
 // @Description get a recipe by ID
 // @ID addrecipe
 // @Produce json
 // Accept json
 // @Param  recipe   body  model.Recipe  true  "Recipe"
-// @Success 201 {object} model.Recipe
+// @Success 201 {object} model.RecipeWithoutID
 // @Router /recipes [post]
 func AddRecipe(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
-	var body model.NewRecipeInput
+	var body model.RecipeWithoutID
 
 	res := json.NewDecoder(r.Body).Decode(&body)
 	if res != nil {
@@ -118,4 +120,51 @@ func AddRecipe(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusCreated)
 	w.Write(data)
+}
+
+// GenerateRecipes godoc
+// @Summary Generate recipe
+// @Description Generate recipes
+// @ID generaterecipe
+// @Produce json
+// Accept json
+// @Success 201 {object} []model.Recipe
+// @Router /recipes/generate [post]
+func GenerateRecipes(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	// numRecipesToCreate := 10
+	recipesCreated := make([]*model.Recipe, 0)
+	filename := "data/testdata.json"
+
+	fileContent, err := os.Open(filename)
+
+	if err != nil {
+		fmt.Errorf("failed to open file")
+		w.Write(getErrorResponse("Failed to open testdata file"))
+	}
+
+	defer fileContent.Close()
+
+	byteResult, _ := io.ReadAll(fileContent)
+
+	var testData []model.Recipe
+	json.Unmarshal([]byte(byteResult), &testData)
+
+	for _, recipe := range testData {
+		recipeCopy := model.RecipeWithoutID{
+			Name:        recipe.Name,
+			Description: recipe.Description,
+			Steps:       recipe.Steps,
+			Category:    recipe.Category,
+			Ingredients: recipe.Ingredients,
+		}
+		recipesCreated = append(recipesCreated, &recipe)
+		db.SaveRecipe(&recipeCopy)
+	}
+
+	w.WriteHeader(http.StatusCreated)
+	res, _ := loadDataAsJSON(recipesCreated)
+	w.Write(res)
+
 }
