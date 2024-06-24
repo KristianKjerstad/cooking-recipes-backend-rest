@@ -54,6 +54,21 @@ func Connect() *DB {
 	return &DB{client: client, recipeCollection: recipeCollection, ingredientCollection: ingredientCollection}
 }
 
+func (db *DB) SaveIngredient(input *model.IngredientWithoutID) *model.Ingredient {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	res, err := db.ingredientCollection.InsertOne(ctx, input)
+	if err != nil {
+		log.Print(err)
+		return nil
+	}
+	return &model.Ingredient{
+		ID:   res.InsertedID.(primitive.ObjectID).Hex(),
+		Name: input.Name,
+	}
+}
+
 func (db *DB) SaveRecipe(input *model.RecipeWithoutID) *model.Recipe {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
@@ -64,29 +79,13 @@ func (db *DB) SaveRecipe(input *model.RecipeWithoutID) *model.Recipe {
 		return nil
 	}
 
-	ingredients := make([]*model.Ingredient, len(input.Ingredients))
-	for i, ing := range input.Ingredients {
-		ingredient := model.IngredientWithoutID{
-			Name:     ing.Name,
-			Unit:     ing.Unit,
-			Quantity: ing.Quantity,
-		}
-		res, _ := db.ingredientCollection.InsertOne(ctx, ingredient)
-		ingredients[i] = &model.Ingredient{
-			ID:       res.InsertedID.(primitive.ObjectID).Hex(),
-			Name:     ingredient.Name,
-			Unit:     ingredient.Unit,
-			Quantity: ingredient.Quantity,
-		}
-	}
-
 	return &model.Recipe{
 		ID:          res.InsertedID.(primitive.ObjectID).Hex(),
 		Name:        input.Name,
 		Description: input.Description,
 		Category:    input.Category,
 		Steps:       input.Steps,
-		Ingredients: ingredients,
+		Ingredients: input.Ingredients,
 	}
 }
 
@@ -200,45 +199,45 @@ func (db *DB) AllRecipes() []*model.Recipe {
 	return recipes
 }
 
-func (db *DB) UpdateRecipe(newRecipe *model.UpdateRecipeInput) (*model.Recipe, error) {
-	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
-	defer cancel()
+// func (db *DB) UpdateRecipe(newRecipe *model.UpdateRecipeInput) (*model.Recipe, error) {
+// 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+// 	defer cancel()
 
-	originalRecipe := db.FindRecipeByID(newRecipe.ID)
-	if originalRecipe == nil {
-		fmt.Errorf("Could not get original recipe")
-		return nil, nil
-	}
+// 	originalRecipe := db.FindRecipeByID(newRecipe.ID)
+// 	if originalRecipe == nil {
+// 		fmt.Errorf("Could not get original recipe")
+// 		return nil, nil
+// 	}
 
-	var ingredients []*model.Ingredient = make([]*model.Ingredient, len(newRecipe.Ingredients))
-	for i, ing := range newRecipe.Ingredients {
-		ingredient := model.Ingredient{
-			ID:       ing.ID,
-			Name:     derefValue(ing.Name, originalRecipe.Ingredients[i].Name),
-			Quantity: derefValue(ing.Quantity, originalRecipe.Ingredients[i].Quantity),
-			Unit:     derefValue(ing.Unit, originalRecipe.Ingredients[i].Unit),
-		}
-		ingredients[i] = &ingredient
-	}
+// 	var ingredients []*model.Ingredient = make([]*model.Ingredient, len(newRecipe.Ingredients))
+// 	for i, ing := range newRecipe.Ingredients {
+// 		ingredient := model.Ingredient{
+// 			ID:       ing.ID,
+// 			Name:     derefValue(ing.Name, originalRecipe.Ingredients[i].Name),
+// 			Quantity: derefValue(ing.Quantity, originalRecipe.Ingredients[i].Quantity),
+// 			Unit:     derefValue(ing.Unit, originalRecipe.Ingredients[i].Unit),
+// 		}
+// 		ingredients[i] = &ingredient
+// 	}
 
-	recipe := model.Recipe{
-		ID:          newRecipe.ID,
-		Name:        derefValue(newRecipe.Name, originalRecipe.Name),
-		Description: derefValue(newRecipe.Description, originalRecipe.Description),
-		Category:    derefValue(newRecipe.Category, originalRecipe.Category),
-		Steps:       newRecipe.Steps,
-		Ingredients: ingredients,
-	}
-	ObjectID, err := primitive.ObjectIDFromHex(newRecipe.ID)
-	res, err := db.recipeCollection.UpdateOne(ctx, bson.M{"_id": ObjectID}, bson.M{"$set": recipe})
-	fmt.Println(res)
-	if err != nil {
-		fmt.Errorf("Failed to update recipe")
-		return nil, nil
-	}
+// 	recipe := model.Recipe{
+// 		ID:          newRecipe.ID,
+// 		Name:        derefValue(newRecipe.Name, originalRecipe.Name),
+// 		Description: derefValue(newRecipe.Description, originalRecipe.Description),
+// 		Category:    derefValue(newRecipe.Category, originalRecipe.Category),
+// 		Steps:       newRecipe.Steps,
+// 		Ingredients: ingredients,
+// 	}
+// 	ObjectID, err := primitive.ObjectIDFromHex(newRecipe.ID)
+// 	res, err := db.recipeCollection.UpdateOne(ctx, bson.M{"_id": ObjectID}, bson.M{"$set": recipe})
+// 	fmt.Println(res)
+// 	if err != nil {
+// 		fmt.Errorf("Failed to update recipe")
+// 		return nil, nil
+// 	}
 
-	return &recipe, nil
-}
+// 	return &recipe, nil
+// }
 
 func (db *DB) DeleteRecipe(ID string) (bool, error) {
 

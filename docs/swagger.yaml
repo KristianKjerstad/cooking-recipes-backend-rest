@@ -18,9 +18,17 @@ definitions:
         type: string
       name:
         type: string
+    type: object
+  model.IngredientMeta:
+    properties:
       quantity:
         type: number
       unit:
+        type: string
+    type: object
+  model.IngredientWithoutID:
+    properties:
+      name:
         type: string
     type: object
   model.Recipe:
@@ -33,7 +41,11 @@ definitions:
         type: string
       ingredients:
         items:
-          $ref: '#/definitions/model.Ingredient'
+          type: string
+        type: array
+      ingredients_meta:
+        items:
+          $ref: '#/definitions/model.IngredientMeta'
         type: array
       name:
         type: string
@@ -50,7 +62,11 @@ definitions:
         type: string
       ingredients:
         items:
-          $ref: '#/definitions/model.Ingredient'
+          type: string
+        type: array
+      ingredients_meta:
+        items:
+          $ref: '#/definitions/model.IngredientMeta'
         type: array
       name:
         type: string
@@ -87,6 +103,24 @@ paths:
               $ref: '#/definitions/model.Ingredient'
             type: array
       summary: Get all ingredients
+    post:
+      description: Add ingredient
+      operationId: addingredient
+      parameters:
+      - description: Ingredient
+        in: body
+        name: ingredient
+        required: true
+        schema:
+          $ref: '#/definitions/model.IngredientWithoutID'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/model.Ingredient'
+      summary: Add an ingredient
   /ingredients/{name}:
     get:
       description: get ingredient by name

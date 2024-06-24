@@ -32,5 +32,6 @@ func (a *App) loadRecipeRoutes(router chi.Router) {
 
 func (a *App) loadIngredientRoutes(router chi.Router) {
 	router.Get("/", getAllIngredients)
+	router.Post("/", AddIngredient)
 	router.Get("/{name}", getIngredientByName)
 }

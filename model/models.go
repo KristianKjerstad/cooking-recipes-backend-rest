@@ -1,63 +1,62 @@
 package model
 
 import (
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	_ "go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Ingredient struct {
-	ID       string  `json:"_id" bson:"_id"`
-	Name     string  `json:"name"`
+	ID   string `json:"_id" bson:"_id"`
+	Name string `json:"name"`
+}
+
+type IngredientMeta struct {
 	Quantity float64 `json:"quantity"`
 	Unit     string  `json:"unit"`
 }
 
 type IngredientWithoutID struct {
-	Name     string  `json:"name"`
-	Quantity float64 `json:"quantity"`
-	Unit     string  `json:"unit"`
+	Name string `json:"name"`
 }
 
 type Recipe struct {
-	ID          string        `json:"_id" bson:"_id"`
-	Name        string        `json:"name"`
-	Description string        `json:"description,omitempty"`
-	Category    Category      `json:"category"`
-	Steps       []string      `json:"steps"`
-	Ingredients []*Ingredient `json:"ingredients"`
+	ID              string               `json:"_id" bson:"_id"`
+	Name            string               `json:"name"`
+	Description     string               `json:"description,omitempty"`
+	Category        Category             `json:"category"`
+	Steps           []string             `json:"steps"`
+	Ingredients     []primitive.ObjectID `json:"ingredients"`
+	IngredientsMeta []IngredientMeta     `json:"ingredients_meta"`
 }
 
 type RecipeWithoutID struct {
-	Name        string        `json:"name"`
-	Description string        `json:"description,omitempty"`
-	Category    Category      `json:"category"`
-	Steps       []string      `json:"steps"`
-	Ingredients []*Ingredient `json:"ingredients"`
+	Name            string               `json:"name"`
+	Description     string               `json:"description,omitempty"`
+	Category        Category             `json:"category"`
+	Steps           []string             `json:"steps"`
+	Ingredients     []primitive.ObjectID `json:"ingredients"`
+	IngredientsMeta []IngredientMeta     `json:"ingredients_meta"`
 }
 
 type RecipeTestData struct {
-	ID          string        `json:"_id"`
-	Name        string        `json:"name"`
-	Description string        `json:"description,omitempty"`
-	Category    Category      `json:"category"`
-	Steps       []string      `json:"steps"`
-	Ingredients []*Ingredient `json:"ingredients"`
+	ID              string               `json:"_id"`
+	Name            string               `json:"name"`
+	Description     string               `json:"description,omitempty"`
+	Category        Category             `json:"category"`
+	Steps           []string             `json:"steps"`
+	Ingredients     []primitive.ObjectID `json:"ingredients"`
+	IngredientsMeta []IngredientMeta     `json:"ingredients_meta"`
 }
 
-type UpdateIngredientInput struct {
-	ID       string   `json:"_id"`
-	Name     *string  `json:"name,omitempty"`
-	Quantity *float64 `json:"quantity,omitempty"`
-	Unit     *string  `json:"unit,omitempty"`
-}
-
-type UpdateRecipeInput struct {
-	ID          string                   `json:"_id"`
-	Name        *string                  `json:"name,omitempty"`
-	Description *string                  `json:"description,omitempty"`
-	Category    *Category                `json:"category,omitempty"`
-	Steps       []string                 `json:"steps,omitempty"`
-	Ingredients []*UpdateIngredientInput `json:"ingredients,omitempty"`
-}
+// type UpdateRecipeInput struct {
+// 	ID              string               `json:"_id"`
+// 	Name            *string              `json:"name,omitempty"`
+// 	Description     *string              `json:"description,omitempty"`
+// 	Category        *Category            `json:"category,omitempty"`
+// 	Steps           []string             `json:"steps,omitempty"`
+// 	Ingredients     []primitive.ObjectID `json:"ingredients"`
+// 	IngredientsMeta []IngredientMeta     `json:"ingredients_meta"`
+// }
 
 type Category string
 

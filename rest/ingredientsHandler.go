@@ -1,6 +1,7 @@
 package rest
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"rest/model"
@@ -53,7 +54,7 @@ func getIngredientByName(w http.ResponseWriter, r *http.Request) {
 	var ingredient = db.FindIngredientByName(nameParam)
 	if ingredient == nil {
 		fmt.Errorf("Failed to get ingredient")
-		w.WriteHeader(http.StatusInternalServerError)
+		w.WriteHeader(http.StatusNotFound)
 		w.Write(getErrorResponse("Failed to get ingredient"))
 		return
 	}
@@ -64,5 +65,41 @@ func getIngredientByName(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		w.Write(getErrorResponse("Could not load ingredient"))
 	}
+	w.Write(data)
+}
+
+// AddIngredient godoc
+// @Summary Add an ingredient
+// @Description Add ingredient
+// @ID addingredient
+// @Produce json
+// Accept json
+// @Param  ingredient   body  model.IngredientWithoutID  true  "Ingredient"
+// @Success 201 {object} model.Ingredient
+// @Router /ingredients [post]
+func AddIngredient(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+	var body model.IngredientWithoutID
+
+	res := json.NewDecoder(r.Body).Decode(&body)
+	if res != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		w.Write(getErrorResponse("Failed to decode ingredient"))
+		return
+	}
+	existingIngredient := db.FindIngredientByName(body.Name)
+	if existingIngredient != nil {
+		w.WriteHeader(http.StatusConflict)
+		w.Write(getErrorResponse("An ingredient with this name already exists"))
+		return
+	}
+	newIngredient := db.SaveIngredient(&body)
+	data, err := loadDataAsJSON(newIngredient)
+	if err != nil {
+		w.Write(getErrorResponse("Failed to load ingredient"))
+		fmt.Errorf("Failed to load ingredient as json")
+		return
+	}
+	w.WriteHeader(http.StatusCreated)
 	w.Write(data)
 }

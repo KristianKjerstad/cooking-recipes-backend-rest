@@ -43,6 +43,33 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "Add ingredient",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Add an ingredient",
+                "operationId": "addingredient",
+                "parameters": [
+                    {
+                        "description": "Ingredient",
+                        "name": "ingredient",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.IngredientWithoutID"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/model.Ingredient"
+                        }
+                    }
+                }
             }
         },
         "/ingredients/{name}": {
@@ -193,11 +220,24 @@ const docTemplate = `{
                 },
                 "name": {
                     "type": "string"
-                },
+                }
+            }
+        },
+        "model.IngredientMeta": {
+            "type": "object",
+            "properties": {
                 "quantity": {
                     "type": "number"
                 },
                 "unit": {
+                    "type": "string"
+                }
+            }
+        },
+        "model.IngredientWithoutID": {
+            "type": "object",
+            "properties": {
+                "name": {
                     "type": "string"
                 }
             }
@@ -217,7 +257,13 @@ const docTemplate = `{
                 "ingredients": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/model.Ingredient"
+                        "type": "string"
+                    }
+                },
+                "ingredients_meta": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.IngredientMeta"
                     }
                 },
                 "name": {
@@ -243,7 +289,13 @@ const docTemplate = `{
                 "ingredients": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/model.Ingredient"
+                        "type": "string"
+                    }
+                },
+                "ingredients_meta": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.IngredientMeta"
                     }
                 },
                 "name": {
