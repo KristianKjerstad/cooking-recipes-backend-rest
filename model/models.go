@@ -29,6 +29,16 @@ type Recipe struct {
 	IngredientsMeta []IngredientMeta     `json:"ingredients_meta"`
 }
 
+type ResolvedRecipe struct {
+	ID              string           `json:"_id" bson:"_id"`
+	Name            string           `json:"name"`
+	Description     string           `json:"description,omitempty"`
+	Category        Category         `json:"category"`
+	Steps           []string         `json:"steps"`
+	Ingredients     []Ingredient     `json:"ingredients"`
+	IngredientsMeta []IngredientMeta `json:"ingredients_meta"`
+}
+
 type RecipeWithoutID struct {
 	Name            string               `json:"name"`
 	Description     string               `json:"description,omitempty"`

@@ -138,7 +138,7 @@ func (db *DB) FindRecipesByCategory(category model.Category) []*model.Recipe {
 	return recipes
 }
 
-func (db *DB) FindRecipeByID(ID string) *model.Recipe {
+func (db *DB) FindRecipeByID(ID string) *model.ResolvedRecipe {
 	ObjectID, err := primitive.ObjectIDFromHex(ID)
 	if err != nil {
 		log.Print(err)
@@ -150,10 +150,29 @@ func (db *DB) FindRecipeByID(ID string) *model.Recipe {
 	if res.Err() != nil {
 		return nil
 	}
+
 	recipe := model.Recipe{}
 	res.Decode(&recipe)
 
-	return &recipe
+	ingredientsResult, err := db.ingredientCollection.Find(ctx, bson.M{"_id": bson.M{"$in": recipe.Ingredients}})
+	if err != nil {
+		fmt.Errorf("could not resolve ingredients for recipe.")
+		return nil
+
+	}
+	ingredients := []model.Ingredient{}
+	ingredientsResult.Decode(&ingredients)
+	resolvedRecipe := model.ResolvedRecipe{
+		ID:              recipe.ID,
+		Description:     recipe.Description,
+		Name:            recipe.Name,
+		Category:        recipe.Category,
+		Steps:           recipe.Steps,
+		Ingredients:     ingredients,
+		IngredientsMeta: recipe.IngredientsMeta,
+	}
+
+	return &resolvedRecipe
 }
 
 func (db *DB) FindRecipeByName(name string) *model.Recipe {
