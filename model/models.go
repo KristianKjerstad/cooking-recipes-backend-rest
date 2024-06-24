@@ -1,5 +1,9 @@
 package model
 
+import (
+	_ "go.mongodb.org/mongo-driver/bson/primitive"
+)
+
 type Ingredient struct {
 	ID       string  `json:"_id"`
 	Name     string  `json:"name"`
@@ -22,7 +26,7 @@ type NewRecipeInput struct {
 }
 
 type Recipe struct {
-	ID          string        `json:"_id"`
+	ID          string        `json:"_id" bson:"_id"`
 	Name        string        `json:"name"`
 	Description *string       `json:"description,omitempty"`
 	Category    Category      `json:"category"`
