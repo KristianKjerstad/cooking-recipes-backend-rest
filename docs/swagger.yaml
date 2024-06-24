@@ -42,6 +42,23 @@ definitions:
           type: string
         type: array
     type: object
+  model.RecipeWithoutID:
+    properties:
+      category:
+        $ref: '#/definitions/model.Category'
+      description:
+        type: string
+      ingredients:
+        items:
+          $ref: '#/definitions/model.Ingredient'
+        type: array
+      name:
+        type: string
+      steps:
+        items:
+          type: string
+        type: array
+    type: object
 host: localhost:4000
 info:
   contact:
@@ -56,6 +73,38 @@ info:
   title: REST API for recipes backend.
   version: "1.0"
 paths:
+  /ingredients:
+    get:
+      description: get all ingredients
+      operationId: allingredients
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Ingredient'
+            type: array
+      summary: Get all ingredients
+  /ingredients/{name}:
+    get:
+      description: get ingredient by name
+      operationId: ingredientbyname
+      parameters:
+      - description: Name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Ingredient'
+      summary: Get ingredient by name
   /recipes:
     get:
       description: get all recipes
@@ -86,7 +135,7 @@ paths:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/model.Recipe'
+            $ref: '#/definitions/model.RecipeWithoutID'
       summary: Add a recipe
   /recipes/{id}:
     get:

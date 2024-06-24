@@ -18,6 +18,7 @@ func (a *App) loadRoutes() {
 
 	router.Get("/swagger/*", httpSwagger.WrapHandler)
 	router.Route("/recipes", a.loadRecipeRoutes)
+	router.Route("/ingredients", a.loadIngredientRoutes)
 
 	a.Router = router
 }
@@ -27,4 +28,9 @@ func (a *App) loadRecipeRoutes(router chi.Router) {
 	router.Get("/{id}", getRecipeByID)
 	router.Post("/", AddRecipe)
 	router.Post("/generate", GenerateRecipes)
+}
+
+func (a *App) loadIngredientRoutes(router chi.Router) {
+	router.Get("/", getAllIngredients)
+	router.Get("/{name}", getIngredientByName)
 }

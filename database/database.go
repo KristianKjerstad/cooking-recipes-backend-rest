@@ -16,8 +16,9 @@ import (
 )
 
 type DB struct {
-	client           *mongo.Client
-	recipeCollection *mongo.Collection
+	client               *mongo.Client
+	recipeCollection     *mongo.Collection
+	ingredientCollection *mongo.Collection
 }
 
 func getEnv(key, defaultValue string) string {
@@ -48,8 +49,9 @@ func Connect() *DB {
 		panic(err)
 	}
 	recipeCollection := client.Database("data").Collection("recipes")
+	ingredientCollection := client.Database("data").Collection("ingredients")
 
-	return &DB{client: client, recipeCollection: recipeCollection}
+	return &DB{client: client, recipeCollection: recipeCollection, ingredientCollection: ingredientCollection}
 }
 
 func (db *DB) SaveRecipe(input *model.RecipeWithoutID) *model.Recipe {
@@ -64,10 +66,17 @@ func (db *DB) SaveRecipe(input *model.RecipeWithoutID) *model.Recipe {
 
 	ingredients := make([]*model.Ingredient, len(input.Ingredients))
 	for i, ing := range input.Ingredients {
-		ingredients[i] = &model.Ingredient{
+		ingredient := model.IngredientWithoutID{
 			Name:     ing.Name,
 			Unit:     ing.Unit,
 			Quantity: ing.Quantity,
+		}
+		res, _ := db.ingredientCollection.InsertOne(ctx, ingredient)
+		ingredients[i] = &model.Ingredient{
+			ID:       res.InsertedID.(primitive.ObjectID).Hex(),
+			Name:     ingredient.Name,
+			Unit:     ingredient.Unit,
+			Quantity: ingredient.Quantity,
 		}
 	}
 
@@ -133,6 +142,41 @@ func (db *DB) FindRecipeByName(name string) *model.Recipe {
 	res.Decode(&recipe)
 
 	return &recipe
+}
+
+func (db *DB) FindIngredientByName(name string) *model.Ingredient {
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+	res := db.ingredientCollection.FindOne(ctx, bson.M{"name": name})
+	if res.Err() != nil {
+		return nil
+	}
+	ingredient := model.Ingredient{}
+
+	res.Decode(&ingredient)
+
+	return &ingredient
+}
+
+func (db *DB) AllIngredients() []*model.Ingredient {
+	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
+	defer cancel()
+	cur, err := db.ingredientCollection.Find(ctx, bson.D{})
+	if err != nil {
+		log.Print(err)
+		return nil
+	}
+	var ingredients []*model.Ingredient
+	for cur.Next(ctx) {
+		var ingredient *model.Ingredient
+		err := cur.Decode(&ingredient)
+		if err != nil {
+			log.Print(err)
+			return nil
+		}
+		ingredients = append(ingredients, ingredient)
+	}
+	return ingredients
 }
 
 func (db *DB) AllRecipes() []*model.Recipe {

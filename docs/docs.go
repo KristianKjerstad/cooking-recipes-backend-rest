@@ -24,6 +24,54 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/ingredients": {
+            "get": {
+                "description": "get all ingredients",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get all ingredients",
+                "operationId": "allingredients",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/model.Ingredient"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/ingredients/{name}": {
+            "get": {
+                "description": "get ingredient by name",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get ingredient by name",
+                "operationId": "ingredientbyname",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Name",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Ingredient"
+                        }
+                    }
+                }
+            }
+        },
         "/recipes": {
             "get": {
                 "description": "get all recipes",
@@ -66,7 +114,7 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/model.Recipe"
+                            "$ref": "#/definitions/model.RecipeWithoutID"
                         }
                     }
                 }
@@ -160,6 +208,32 @@ const docTemplate = `{
                 "_id": {
                     "type": "string"
                 },
+                "category": {
+                    "$ref": "#/definitions/model.Category"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "ingredients": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/model.Ingredient"
+                    }
+                },
+                "name": {
+                    "type": "string"
+                },
+                "steps": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "model.RecipeWithoutID": {
+            "type": "object",
+            "properties": {
                 "category": {
                     "$ref": "#/definitions/model.Category"
                 },

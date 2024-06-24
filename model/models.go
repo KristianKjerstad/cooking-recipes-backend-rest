@@ -5,11 +5,18 @@ import (
 )
 
 type Ingredient struct {
-	ID       string  `json:"_id"`
+	ID       string  `json:"_id" bson:"_id"`
 	Name     string  `json:"name"`
 	Quantity float64 `json:"quantity"`
 	Unit     string  `json:"unit"`
 }
+
+type IngredientWithoutID struct {
+	Name     string  `json:"name"`
+	Quantity float64 `json:"quantity"`
+	Unit     string  `json:"unit"`
+}
+
 type Recipe struct {
 	ID          string        `json:"_id" bson:"_id"`
 	Name        string        `json:"name"`
