@@ -48,12 +48,12 @@ info:
     email: support@swagger.io
     name: API Support
     url: http://www.swagger.io/support
-  description: This is a sample server.
+  description: REST API.
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   termsOfService: http://swagger.io/terms/
-  title: Swagger Example API
+  title: REST API for recipes backend.
   version: "1.0"
 paths:
   /recipes:
@@ -70,4 +70,40 @@ paths:
               $ref: '#/definitions/model.Recipe'
             type: array
       summary: Get all recipes
+    post:
+      description: get a recipe by ID
+      operationId: addrecipe
+      parameters:
+      - description: Recipe
+        in: body
+        name: recipe
+        required: true
+        schema:
+          $ref: '#/definitions/model.Recipe'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Recipe'
+      summary: Add a recipe
+  /recipes/{id}:
+    get:
+      description: get a recipe by ID
+      operationId: getrecipe
+      parameters:
+      - description: Recipe ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Recipe'
+      summary: Get recipe by ID
 swagger: "2.0"

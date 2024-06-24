@@ -58,7 +58,8 @@ func (db *DB) SaveRecipe(input *model.NewRecipeInput) *model.Recipe {
 	defer cancel()
 	res, err := db.recipeCollection.InsertOne(ctx, input)
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return nil
 	}
 
 	ingredients := make([]*model.Ingredient, len(input.Ingredients))
@@ -90,9 +91,11 @@ func (db *DB) FindRecipesByCategory(category model.Category) []*model.Recipe {
 	var recipes []*model.Recipe
 	for cur.Next(ctx) {
 		var recipe *model.Recipe
+
 		err := cur.Decode(&recipe)
 		if err != nil {
-			log.Fatal(err)
+			log.Print(err)
+			return nil
 		}
 		recipes = append(recipes, recipe)
 	}
@@ -103,7 +106,8 @@ func (db *DB) FindRecipesByCategory(category model.Category) []*model.Recipe {
 func (db *DB) FindRecipeByID(ID string) *model.Recipe {
 	ObjectID, err := primitive.ObjectIDFromHex(ID)
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return nil
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
@@ -131,26 +135,21 @@ func (db *DB) FindRecipeByName(name string) *model.Recipe {
 	return &recipe
 }
 
-// AllRecipes godoc
-// @Summary Get all recipes
-// @Description get all recipes
-// @ID allrecipes
-// @Produce json
-// @Success 200 {object} []model.Recipe
-// @Router /recipes [get]
 func (db *DB) AllRecipes() []*model.Recipe {
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	cur, err := db.recipeCollection.Find(ctx, bson.D{})
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
+		return nil
 	}
 	var recipes []*model.Recipe
 	for cur.Next(ctx) {
 		var recipe *model.Recipe
 		err := cur.Decode(&recipe)
 		if err != nil {
-			log.Fatal(err)
+			log.Print(err)
+			return nil
 		}
 		recipes = append(recipes, recipe)
 	}

@@ -43,6 +43,60 @@ const docTemplate = `{
                         }
                     }
                 }
+            },
+            "post": {
+                "description": "get a recipe by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Add a recipe",
+                "operationId": "addrecipe",
+                "parameters": [
+                    {
+                        "description": "Recipe",
+                        "name": "recipe",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Recipe"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Recipe"
+                        }
+                    }
+                }
+            }
+        },
+        "/recipes/{id}": {
+            "get": {
+                "description": "get a recipe by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get recipe by ID",
+                "operationId": "getrecipe",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Recipe ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Recipe"
+                        }
+                    }
+                }
             }
         }
     },
@@ -117,8 +171,8 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:4000",
 	BasePath:         "/",
 	Schemes:          []string{},
-	Title:            "Swagger Example API",
-	Description:      "This is a sample server.",
+	Title:            "REST API for recipes backend.",
+	Description:      "REST API.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

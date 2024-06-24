@@ -16,7 +16,6 @@ func (a *App) loadRoutes() {
 	// processing should be stopped.
 	router.Use(middleware.Timeout(60 * time.Second))
 
-	router.Get("/", Hello)
 	router.Get("/swagger/*", httpSwagger.WrapHandler)
 	router.Route("/recipes", a.loadRecipeRoutes)
 

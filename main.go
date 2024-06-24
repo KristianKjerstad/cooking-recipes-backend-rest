@@ -8,9 +8,9 @@ import (
 	"rest/rest"
 )
 
-// @title Swagger Example API
+// @title REST API for recipes backend.
 // @version 1.0
-// @description This is a sample server.
+// @description REST API.
 // @termsOfService http://swagger.io/terms/
 
 // @contact.name API Support

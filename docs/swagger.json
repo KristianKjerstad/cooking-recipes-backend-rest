@@ -1,8 +1,8 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "This is a sample server.",
-        "title": "Swagger Example API",
+        "description": "REST API.",
+        "title": "REST API for recipes backend.",
         "termsOfService": "http://swagger.io/terms/",
         "contact": {
             "name": "API Support",
@@ -34,6 +34,60 @@
                             "items": {
                                 "$ref": "#/definitions/model.Recipe"
                             }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "get a recipe by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Add a recipe",
+                "operationId": "addrecipe",
+                "parameters": [
+                    {
+                        "description": "Recipe",
+                        "name": "recipe",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/model.Recipe"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Recipe"
+                        }
+                    }
+                }
+            }
+        },
+        "/recipes/{id}": {
+            "get": {
+                "description": "get a recipe by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "Get recipe by ID",
+                "operationId": "getrecipe",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Recipe ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/model.Recipe"
                         }
                     }
                 }
